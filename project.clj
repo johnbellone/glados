@@ -7,10 +7,12 @@
                  [org.clojure/tools.cli "0.3.3"]
                  [org.clojure/tools.logging "0.3.1"]
                  [clj-logging-config "1.9.12"]
+                 [clj-time "0.11.0"]
                  [emiln/slacker "1.4.0"]
                  [environ "1.0.0"]
                  [metosin/compojure-api "0.23.1"]
-                 [http-kit "2.1.18"]]
+                 [http-kit "2.1.19"]
+                 [ragtime "0.5.2"]]
   :ring {:handler glados.handler/app}
   :bin {:name "glados"}
   :profiles {:uberjar {:aot :all}
