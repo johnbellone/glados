@@ -4,11 +4,16 @@
             [clojure.tools.logging :as log]
             [slacker.client :as client]
             [clojure.tools.cli :refer [parse-opts]]
+            [org.httpkit.server :as http]
             [environ.core :refer [env]]
             [clj-logging-config.log4j :refer [set-logger!]]))
 
 (def cli-options
-  [["-S" "--slack-token TOKEN" "Sets the Slack API token."]
+  [["-p" "--port PORT" "Set the HTTP server port."
+    :default (env :port 8080)
+    :parse-fn #(Integer/parseInt %)
+    :validate [#(< 1024 % 0x10000) "Must be integer between 1024 and 65536."]]
+   ["-S" "--slack-token TOKEN" "Sets the Slack API token."]
    ["-l" "--log-level LEVEL" "Sets the log level."
     :default "info"
     :parse-fn keyword
@@ -41,6 +46,7 @@
   [& args]
   (let [{:keys [options arguments errors summary]} (parse-opts args cli-options)]
     (set-logger! :level (:log-level options))
-    (condp
+    (cond
       (:help options) (exit 0 (usage summary))
-      errors (exit 1 (error-message errors)))))
+      errors (exit 1 (error-message errors)))
+    (http/run-server glados.handler/app {:port (:port options)})))
