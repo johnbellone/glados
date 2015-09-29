@@ -1,6 +1,7 @@
 (ns glados.core
   (:gen-class)
-  (:require [clojure.string :as string]
+  (:require [glados.handler]
+            [clojure.string :as string]
             [clojure.tools.logging :as log]
             [slacker.client :as client]
             [clojure.tools.cli :refer [parse-opts]]

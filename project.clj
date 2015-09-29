@@ -9,14 +9,16 @@
                  [clj-logging-config "1.9.12"]
                  [clj-time "0.11.0"]
                  [emiln/slacker "1.4.0"]
-                 [environ "1.0.0"]
+                 [environ "1.0.1"]
                  [metosin/compojure-api "0.23.1"]
                  [http-kit "2.1.19"]
-                 [ragtime "0.5.2"]]
-  :ring {:handler glados.handler/app}
+                 [ragtime "0.5.2"]
+                 [ring/ring-jetty-adapter "1.4.0"]]
+  :ring {:handler glados.handler/app
+         :nrepl {:start? true}}
   :bin {:name "glados"}
   :profiles {:uberjar {:aot :all}
              :dev {:dependencies [[javax.servlet/servlet-api "2.5"]]
                    :plugins [[lein-bin "0.3.5"]
                              [lein-environ "1.0.0"]
-                             [lein-ring "0.9.6"]]}})
+                             [lein-ring "0.9.7"]]}})
