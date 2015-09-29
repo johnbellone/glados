@@ -8,7 +8,7 @@
   (swagger-ui)
   (swagger-docs
    {:info {:title "GlaDOS"}})
-  (context "/api" []
+  (context* "/api" []
            (GET* "/webhooks" [] (ok))
            (POST* "/webhooks" [] (ok))
            (PATCH* "/webhooks/:id" [id] (ok))

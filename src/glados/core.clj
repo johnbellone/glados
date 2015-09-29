@@ -6,6 +6,7 @@
             [clojure.tools.cli :refer [parse-opts]]
             [org.httpkit.server :as http]
             [environ.core :refer [env]]
+            [glados.handler :as handler]
             [clj-logging-config.log4j :refer [set-logger!]]))
 
 (def cli-options
@@ -49,4 +50,4 @@
     (cond
       (:help options) (exit 0 (usage summary))
       errors (exit 1 (error-message errors)))
-    (http/run-server glados.handler/app {:port (:port options)})))
+    (http/run-server handler/app {:port (:port options)})))
